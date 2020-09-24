@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="gg.oa.sbs.service.lolhistory.dao.UrlResponseDao">
+	<select id="getUrlResponse" resultType="UrlResponse">
+		SELECT *
+		FROM urlResponse
+		WHERE url = #{url}
+	</select>
+
+	<insert id="saveUrlResponse">
+		INSERT INTO urlResponse
+		SET regDate = NOW(),
+		updateDate = NOW(),
+		url = #{url},
+		body = #{body}
+	</insert>
+
+	<insert id="updateUrlResponse">
+		UPDATE urlResponse
+		SET body = #{body},
+		updateDate =
+		NOW()
+		WHERE url =
+		#{url}
+	</insert>
+
+</mapper>

@@ -1,0 +1,82 @@
+spring:
+  profiles:
+    active: local # 기본적으로 local이 선택된다는 뜻
+  redis:
+    host: localhost
+    port: 6379
+  session:
+    timeout: 600
+    store-type: redis
+    redis:
+      flush-mode: on-save
+      namespace: spring:session
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: jangka512@gmail.com
+    password: caslfrokflgzpwan
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  servlet:
+    multipart:
+      file-size-threshold: 1MB
+      location: C:\temp
+      max-file-size: 100MB
+      max-request-size: 100MB
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/lolHistory?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
+    username: sbsst
+    password: sbs123414
+mybatis:
+  type-aliases-package: gg.oa.sbs.service.lolhistory.dto
+server:
+  error:
+    include-exception: true
+    include-stacktrace: always
+    include-message: always
+    include-binding-errors: always
+custom:
+  siteName: 롤 전적검색
+  siteMainUri: https://lol.webtool.best/
+  logoText: 롤 전적검색
+  emailFrom: no-reply@lol.webtool.best
+  emailFromName: 롤 전적검색
+  logging:
+    dir: log
+    level: info
+  lolApi:
+    apiKey: RGAPI-894eae05-e92e-4c69-b6db-f12f6622105c
+
+---
+
+spring:
+  profiles: local
+server:
+  port: 8085
+
+---
+
+spring:
+  profiles: production
+  servlet:
+    multipart:
+      location: /tmp
+  datasource:
+    username: joaLocal
+    password: sbs123414
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/lolHistory?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
+custom:
+  logging:
+    dir: /tmp/lolHistory-log
+    level: info
+    
